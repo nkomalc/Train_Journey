@@ -1,0 +1,71 @@
+.between_labels{
+    display: inline-block;
+    width: 40%;
+    vertical-align: middle;
+}
+.between_inputs{
+    display: inline-block;
+    vertical-align: middle;
+    width: 55%;
+}
+.between_inp_rows{
+    margin: 15px;
+    padding: 2px;
+    width: 100%;
+}
+.betweens_form{
+    width: 65%;
+    margin: 0px auto;
+}
+.between_result_rows:hover{
+    cursor: pointer;
+    border: 2px solid blue;
+}
+.exchange_buuton{
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url("../../images/swap.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 29px;
+    height: 38px;
+    background-color: #1abc9c;
+    line-height: 1.42857143;
+}
+#train_between_div {
+    background-image: url('../../images/sapsan.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 51%;
+}
+#searchButton{
+    background-color: #1abc9c;
+    color: whitesmoke;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    height: 38px;
+}
+.sm-form-control{
+    display: block;
+    width: 100%;
+    height: 38px;
+    padding: 8px 14px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 2px solid orange;
+    border-radius: 5% ;
+}
+.error_msg{
+    color: red;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+

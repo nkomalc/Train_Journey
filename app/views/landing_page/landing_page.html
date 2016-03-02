@@ -1,0 +1,65 @@
+
+
+     <span class="Enq_heading" style="text-align: left;">TRAIN ROUTE</span>
+    <!--  -->
+     <br/>
+
+    <div id="Enquiry_div">
+        <span class="Enq_heading">You Queried For</span>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th class="Enq_table_heading">Train No</th>
+                    <th class="Enq_table_heading">Train Name</th>
+                    <th class="Enq_table_heading">Runs From Source</th>
+                    <th class="Enq_table_heading"> Runs On</th>
+                </tr>
+            <thead>
+            <tbody>
+                <tr>
+                    <td class="Enq_data" ng-bind="train.number"></td>
+                    <td class="Enq_data"  ng-bind="train.name"></td>
+                    <td class="Enq_data"  ng-bind="routes[0].fullname"></td>
+                    <td class="Enq_data" > <span  ng-repeat="x in days track by $index">{{x}} </span> </td>
+                </tr>
+            <tbody>
+        </table>
+        <br/>
+
+    </div>
+
+
+    <!-- Route Info-->
+
+    <div>
+        <span class="Enq_heading">Train Route</span>
+        <table>
+            <thead>
+                <tr>
+                    <th>SNo</th>
+                    <th> Stn Code</th>
+                    <th>Stn Name</th>
+                    <th> Route No.</th>
+                    <th>Arrival Time</th>
+                    <th>Dep. Time</th>
+                    <th>Halt Time (In Minutes)</th>
+                    <th>Distance</th>
+                    <th>Day</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr  ng-repeat="x in routes track by $index">
+                <td ng-bind="x.no">James</td>
+                <td ng-bind="x.code">Matman</td>
+                <td ng-bind="x.fullname">Chief Sandwich Eater</td>
+                <td ng-bind="x.route">Lettuce Green</td>
+                <td ng-bind="x.scharr">Trek</td>
+                <td ng-bind="x.schdep">Digby Green</td>
+                <td ng-bind="x.halt">January 13, 1979</td>
+                <td ng-bind="x.distance">Gotham City</td>
+                <td ng-bind="x.day">3.1</td>
+            </tr>
+            </tbody>
+        </table>
+
+</div>

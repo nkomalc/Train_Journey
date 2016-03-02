@@ -1,0 +1,136 @@
+
+<span class="Enq_heading"> Train Fare Enquiry </span>
+<div class="container" style="    width: initial;">
+    <div class="row">
+        <span style="font-size: 14px;"><i>Enter Following Details to View Fare Details</i></span> <br/><br/>
+        <div class="row rowfare">
+            <div class="col-sm-3 fareForm">
+                    <label>Train Number : </label> <br/>
+                    <input class="fare_enq" type="text" ng-model="txtTrainNo" readonly/>
+            </div>
+            <div class="col-sm-3 fareForm">
+                    <label>Day and Month :  </label> <br/>
+                    <input  type="date" id="txtDatePicker" class="datepicker fare_enq" ng-model="txtTrainDate" />
+            </div>
+        </div>
+        <div class="row rowfare">
+            <div class="col-sm-3 fareForm">
+                <label>Source Station Code : </label> <br/>
+                <select class="fare_enq" ng-model="optFareSrcCode">
+                    <option ng-repeat="x in routes" value="{{x.code}}">{{x.fullname}}</option>
+                </select>
+            </div>
+            <div class="col-sm-3 fareForm">
+                <label>Destination Station Code : </label> <br/>
+                <select class="fare_enq" ng-model="optFareDesCode">
+                    <option ng-repeat="x in routes" value="{{x.code}}">{{x.fullname}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row rowfare">
+            <div class="col-sm-3 fareForm">
+                <label> Age : </label> <br/>
+                <input class="fare_enq" type="number" ng-model="txtAge" />
+            </div>
+            <div class="col-sm-3 fareForm">
+                <label> Quota : </label> <br/>
+                <select class="fare_enq" ng-model="optFareQuota" ng-init="optFareQuota='GN'">
+
+                    <option value="CK"> Tatkal Quota </option>
+
+                    <option value="PT"> Premium Tatkal Quota </option>
+
+                    <option value="LD"> Ladies Quota </option>
+
+                    <option value="DF"> Defence Quota </option>
+
+                    <option value="FT"> Foreign Tourist </option>
+
+                    <option value="DP"> Duty Pass Quota </option>
+
+                    <option value="HP"> Handicaped Quota </option>
+
+                    <option value="PH"> Parliament House Quota </option>
+
+                    <option value="SS"> Lower Berth Quota </option>
+
+                    <option value="YU"> Yuva Quota </option>
+
+                    <option value="GN" ng-selected="true">GENERAL QUOTA</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 error_msg" style="text-align: center;" ng-if="displayError" ng-bind="errorMsg">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6" style="text-align: center;">
+                <button class="btngetfare" ng-click="btnGetFare()">Get Fare</button>
+            </div>
+        </div>
+        <div ng-if="displayMainLoader" style="text-align: center; top: 5%; position: absolute; width: 100%;height: 90%;padding-top: 20%; opacity: 0.9;background-color: #DCDCEC;">
+            <img src="images/332%20(1).gif" style="margin: 10px;">
+        </div>
+
+    </div>
+
+    <!-- Displat Result-->
+    <div ng-if="displayResult">
+        <spam class="Enq_heading">You Queried For</spam>
+        <!-- table-->
+        <table>
+            <thead>
+                <tr>
+                    <th>Train Number</th>
+                    <th>Train Name </th>
+                    <th>Date (DD-MM-YYYY) </th>
+                    <th>Source Station</th>
+                    <th>Destination Station</th>
+                    <th>Quota Code </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="Fare_Enq_data"  ng-bind="Train_Fare_Enquiry.train.number"></td>
+                    <td class="Fare_Enq_data" ng-bind="Train_Fare_Enquiry.train.name"></td>
+                    <td class="Fare_Enq_data" ng-bind="txtTrainDate"></td>
+                    <td class="Fare_Enq_data" ng-bind="Train_Fare_Enquiry.from.name"></td>
+                    <td class="Fare_Enq_data" ng-bind="Train_Fare_Enquiry.to.name"></td>
+                    <td class="Fare_Enq_data" ng-bind="Train_Fare_Enquiry.quota.name"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Classes</th>
+                    <th>Fare / Charges </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in Train_Fare_Enquiry.fare">
+                    <td class="Fare_charges" ng-bind="x.name">  </td>
+                    <td class="Fare_charges" ng-bind="x.fare">  </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Fare Charges with Classes AC,...-->
+        <!--<div>-->
+            <!--&lt;!&ndash; Heading&ndash;&gt;-->
+            <!--<div>-->
+                <!--<div style="display: inline; vertical-align: top;">Classes</div>-->
+                <!--<div style="display: inline; vertical-align: top;">Fare / Charges </div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; Values....&ndash;&gt;-->
+            <!--<div ng-repeat="x in Train_Fare_Enquiry.fare">-->
+                <!--<div style="display: inline; vertical-align: top;" ng-bind="x.name">Classes</div>-->
+                <!--<div style="display: inline; vertical-align: top;" ng-bind="x.fare">Fare / Charges</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>

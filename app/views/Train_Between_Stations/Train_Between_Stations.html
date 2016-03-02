@@ -1,0 +1,211 @@
+<!--<div>-->
+
+    <!--<span class="Enq_heading">Train Availability Between Important Stations</span>-->
+    <!--&lt;!&ndash; Data Entry&ndash;&gt;-->
+    <!--<div class="betweens_form" ng-if="betweens_form">-->
+        <!--<div class="between_inp_rows">-->
+            <!--<div class="between_labels">-->
+                <!--Source Station :-->
+
+            <!--<div class="between_inputs">-->
+                <!--<input type="text" id="optSuggSrcCode" ng-model="optSuggSrcCode" ng-keyup="txtStationName_keyUp($event,this, optSuggSrcCode)"-->
+                       <!--placeholder="Source Station :"/>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<select ng-model="optSuggSrcCode">&ndash;&gt;-->
+                <!--&lt;!&ndash;<option ng-repeat="x in routes" value="{{x.code}}">{{x.fullname}}</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="between_inp_rows">-->
+            <!--<div class="between_labels">-->
+                <!--Destination Station :-->
+            <!--</div>-->
+            <!--<div class="between_inputs">-->
+                <!--<input type="text" id="optSuggDesCode" ng-model="optSuggDesCode" ng-keyup="txtStationNameDes_keyUp($event,this, optSuggDesCode)" placeholder="Destination Station :"/>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<select ng-model="optSuggDesCode">&ndash;&gt;-->
+                <!--&lt;!&ndash;<option ng-repeat="x in routes" value="{{x.code}}">{{x.fullname}}</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="between_inp_rows">-->
+            <!--<div class="between_labels">-->
+                <!--Date :-->
+            <!--</div>-->
+            <!--<div class="between_inputs">-->
+                <!--<input type="date" id="txtSuggDatePicker" class="datepicker" ng-model="txtSuggTrainDate" placeholder="Date :"/>-->
+                <!--<script>-->
+                    <!--$(function() {-->
+                        <!--$( "#datepicker" ).datepicker();-->
+                    <!--});-->
+                    <!--$(function() {-->
+                        <!--$( ".datepicker" ).datepicker();-->
+                    <!--});-->
+                <!--</script>-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <!--<div>-->
+            <!--<button ng-click="btnGetDetails()">Get Details</button>-->
+        <!--</div>-->
+    <!--</div>-->
+        <!--</div>-->
+    <!--&lt;!&ndash;//Display Result&ndash;&gt;-->
+    <!--<div ng-if="!betweens_form">-->
+        <!--<span style="display: inline-block;">Trains Between a Pair of Stations</span>-->
+
+        <!--<table border="1">-->
+            <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th >Origin</th>-->
+                    <!--<th>Destination</th>-->
+                    <!--<th>Date</th>-->
+                <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td class="between_Query" ng-bind="optSuggSrcCode"> </td>-->
+                    <!--<td class="between_Query" ng-bind="optSuggDesCode"> </td>-->
+                    <!--<td class="between_Query" ng-bind="txtSuggTrainDate"> Class </td>-->
+                <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+        <!--<br/>-->
+
+        <!--<table>-->
+            <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>Train No.</th>-->
+                    <!--<th>Train Name</th>-->
+                    <!--<th >Origin</th>-->
+                    <!--<th>Dep.Time</th>-->
+                    <!--<th>Destination</th>-->
+                    <!--<th>Arr.Time</th>-->
+                    <!--<th>Travel Time</th>-->
+                    <!--<th>Days Of Run</th>-->
+                <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+                <!--<tr  ng-repeat="x in Trains_Between_Station" class="between_result_rows" ng-click="GoTrainRoute(x.number)">-->
+                    <!--<td  class="between_trains" ng-bind="x.number"></td>-->
+                    <!--<td  class="between_trains" ng-bind="x.name"></td>-->
+                    <!--<td class="between_trains"  ng-bind="x.from.name"></td>-->
+                    <!--<td class="between_trains"  ng-bind="x.src_departure_time"></td>-->
+                    <!--<td class="between_trains"  ng-bind="x.to.name"></td>-->
+                    <!--<td class="between_trains"  ng-bind="x.dest_arrival_time"></td>-->
+                    <!--<td class="between_trains"  ng-bind="x.travel_time"></td>-->
+                    <!--<td class="between_trains">-->
+                        <!--<span ng-repeat="y in x.days" ng-if="y.runs==='Y'"> {{y["day-code"]}} </span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+
+    <!--</div>-->
+
+<!--</div>-->
+
+<div id="train_between_div" class="container clearfix" style="width: initial !important;">
+    <span style="margin: 15px;" class="Enq_heading">Train Availability Between Important Stations</span>
+    <div style=" background: rgba(255,255,255,0.7);  padding:15px;">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <label>Departure From</label> <br/>
+                        <input type="text" class="search_station sm-form-control ui-autocomplete-input"
+                               id="optSuggSrcCode" ng-model="optSuggSrcCode" ng-keyup="txtStationName_keyUp($event,this, optSuggSrcCode)" placeholder="Source Station :"/>
+                        <img ng-if="displayLoaderAutocomplete_src" src="images/491.gif" style="width:50%; height: 3px;">
+                    </div>
+                    <div class="col-sm-2 text-center" id="swap_button_div" style="text-align: left;">
+                        <label>&nbsp;</label><br>
+                        <span class="exchange_buuton"></span>
+                        <br/>
+                    </div>
+                    <div class="col-sm-5">
+                        <label>Arrival To</label> <br/>
+                        <input name="to" type="text" class="search_station sm-form-control ui-autocomplete-input"
+                           id="optSuggDesCode" ng-model="optSuggDesCode" ng-keyup="txtStationNameDes_keyUp($event,this, optSuggDesCode)" placeholder="Destination Station :" />
+                        <img ng-if="displayLoaderAutocomplete_des" src="images/491.gif" style="width:50%; height: 3px;">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-sm-5 col-md-7">
+                        <label>Date</label> <br/>
+                        <input type="date" class="sm-form-control hasDatepicker"
+                               id="txtSuggDatePicker" ng-model="txtSuggTrainDate" placeholder="Date :" />
+                    </div>
+                    <div class="col-sm-7 col-md-5 text-right" style="text-align: center;">
+                        <label>&nbsp;</label><br>
+                        <button id="searchButton" type="button" class="button button-3d nomargin" ng-click="btnGetDetails()">
+                            Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <br/>
+            <span ng-if="iv_error" class="error_msg" ng-bind="iv_error_msg">
+            </span>
+        </div>
+    </div>
+</div>
+<!--332 (1).gif-->
+    <div style="text-align: center;">
+        <img ng-if="displayMainLoader" src="images/332%20(1).gif" style="">
+        <span style="margin-top: 10px;" class="error_msg" ng-if="blankDesResult" ng-bind="blankDesResultMag"></span>
+    </div>
+
+
+    <div ng-if="!betweens_form">
+        <br/>
+        <span class="Enq_heading">You Queried For</span>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th >Origin</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="between_Query" ng-bind="optSuggSrcCode"> </td>
+                    <td class="between_Query" ng-bind="optSuggDesCode"> </td>
+                    <td class="between_Query" ng-bind="txtSuggTrainDate"> Class </td>
+                </tr>
+            </tbody>
+        </table>
+            <br/>
+        <span class="Enq_heading">Trains Between a Pair of Stations</span>
+        <table>
+            <thead>
+                <tr>
+                    <th>Train No.</th>
+                    <th>Train Name</th>
+                    <th >Origin</th>
+                    <th>Dep.Time</th>
+                    <th>Destination</th>
+                    <th>Arr.Time</th>
+                    <th>Travel Time</th>
+                    <th>Days Of Run</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  ng-repeat="x in Trains_Between_Station" class="between_result_rows" ng-click="GoTrainRoute(x.number)">
+                <td  class="between_trains" ng-bind="x.number"></td>
+                <td  class="between_trains" ng-bind="x.name"></td>
+                <td class="between_trains"  ng-bind="x.from.name"></td>
+                <td class="between_trains"  ng-bind="x.src_departure_time"></td>
+                <td class="between_trains"  ng-bind="x.to.name"></td>
+                <td class="between_trains"  ng-bind="x.dest_arrival_time"></td>
+                <td class="between_trains"  ng-bind="x.travel_time"></td>
+                <td class="between_trains">
+                    <span ng-repeat="y in x.days" ng-if="y.runs==='Y'"> {{y["day-code"]}} </span>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>

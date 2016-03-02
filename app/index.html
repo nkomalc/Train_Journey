@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- Linking to CSS-->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="views/landing_page/css_landing_page.css">
+    <link rel="stylesheet" href="views/google_map/css_google_map.css">
+    <link rel="stylesheet" href="views/Train_Between_Stations/css_Train_Between_Stations.css">
+    <link rel="stylesheet" href="views/seat_availability/css_seat_availability.css">
+    <link rel="stylesheet" href="views/fare_enquiry/css_fare_enquiry.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+</head>
+<body>
+
+    <div ng-controller="Ctrl_Search" id="main_content"  class="container-fluid">
+        <header>
+            <!--<h1 style="display: inline">City Gallery</h1>-->
+            <a href='#'  ng-click="btnHome_Click()">
+                <img id="logo" src="images/main_logo_landscape.png" />
+                <img id="logo2" src="images/main_logo_landscape_Copy.png" />
+            </a>
+                    <div class="button_box2">
+                        <form class="form-wrapper-2 cf">
+                            <input type="text" id="tags" ng-model="txtSearch" ng-keyup="complete($event)" placeholder="Enter Train No. or Name here..." required>
+                            <button type="submit" ng-click="btnSearch_Click()">Search</button>
+                        </form>
+                        <img ng-if="displayLoaderAutocomplete" src="images/491.gif" style="width:50%; height: 3px;">
+
+                    </div>
+
+        </header>
+        <div id="black_loader" style="text-align: center;" class="container ">
+            <!--train_route_loader-->
+            <div id="loader_div" ng-if="train_route_loader">
+                <div style="margin: 20% auto; ">
+                    <img src="images/279.gif"/>
+                </div>
+            </div>
+        </div>
+        <div id="section_body">
+
+            <div id='cssmenu'>
+                <ul>
+                    <li><a href='#'  ng-click="btnHome_Click()">Home</a></li>
+                    <li ng-if="showGoogleMap"><a href='#google_map'>Route Map</a></li>
+                    <li ng-if="showGoogleMap"><a href='#seat_availability'>Seat Availability</a></li>
+                    <li ng-if="showGoogleMap"><a href='#fare_enquiry'>Fare Enquiry</a></li>
+                    <li class='active'><a href='#Train_Between_Stations'>Reserved Train Between Imp Stations</a> </li>
+                </ul>
+            </div>
+
+            <div id="section_div_index" class="container" ng-if="home_page">
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                                <li data-target="#myCarousel" data-slide-to="3"></li>
+                                <li data-target="#myCarousel" data-slide-to="4"></li>
+                                <li data-target="#myCarousel" data-slide-to="5"></li>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active">
+                                    <img src="images/Delhi_Metro.jpg" alt="Image" class="index_images"/>
+                                    <div class="carousel-caption">
+                                        <h3>Delhi Metro</h3>
+                                        <p>In Capital City Delhi& NCR</p>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <img src="images/Bangalore_Metro.jpg" alt="Image" class="index_images" />
+                                    <div class="carousel-caption">
+                                        <h3>Bangalore Metro $</h3>
+                                        <p> Metro system for the city of Bangalore</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="item">
+                                    <img src="images/Kolkata_Metro.JPG" alt="Image" class="index_images" />
+                                    <div class="carousel-caption">
+                                        <h3>Kolkata Metro $</h3>
+                                        <p>The oldest metro in India and 17th zone Indian Railways</p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="images/Hyderabad.jpg" alt="Image" class="index_images" />
+                                    <div class="carousel-caption">
+                                        <h3>MMTS, Hyderabad $</h3>
+                                        <p>The MMTS at the Fathenagar station</p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="images/Jaipur_Metro.png" alt="Image" class="index_images" />
+                                    <div class="carousel-caption">
+                                        <h3>Jaipur Metro $</h3>
+                                        <p>The First Trial Run of Jaipur Metro</p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="images/Chennai_MRTS.jpg" alt="Image" class="index_images" />
+                                    <div class="carousel-caption">
+                                        <h3>Chennai MRTS $</h3>
+                                        <p>चेन्नई का एक एम् आर टी एस ट्रेन</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="well">
+                            <a href="https://en.wikipedia.org/wiki/Indian_Railways" target="_blank">
+                                <div style="display: inline"><img src="images/indian_railway.jpg" width="60" height="40"/></div>
+                                <div style="display: inline-block">Indian Railway</div>
+                            </a>
+                        </div>
+                        <div class="well">
+                            <a href="https://en.wikipedia.org/wiki/Rail_transport_in_India" target="_blank">
+                                <div style="display: inline"><img src="images/rail_transport.jpg" width="60" height="40"/></div>
+                                <div style="display: inline-block">Rail transport in India</div>
+                            </a>
+                        </div>
+                        <div class="well">
+                            <a href="https://en.wikipedia.org/wiki/Rapid_transit_in_India" target="_blank">
+                                <div style="display: inline"><img src="images/rapid.jpg" width="60" height="40"/></div>
+                                <div style="display: inline-block">Rapid transit in India</div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                        <div class="col-sm-8">
+                                <h4 style="display: inline;">About Indian Railways</h4>
+                                <hr style="display: inline-block; vertical-align: bottom;"><hr/>
+                                <p align="justify">
+                                    <b>Railways</b> were first introduced to India in the year 1853 from Mumbai to Thane. In 1951 the systems were nationalised as one unit, the Indian Railways, becoming one of the largest networks in the world. IR operates both long distance and suburban rail systems on a multi-gauge network of broad, metre and narrow gauges. It also owns locomotive and coach production facilities at several places in India and are assigned codes identifying their gauge, kind of power and type of operation. Its operations cover twenty nine states and seven union territories and also provides limited international services to Nepal, Bangladesh and Pakistan.
+                                </p>
+                                <p align="justify">
+                                    Indian Railways is divided into 16 zones,[15] which are further sub-divided into divisions. The number of zones in Indian Railways increased from six to eight in 1951, nine in 1966 and sixteen in 2003.[16][17] Each zonal railway is made up of a certain number of divisions, each having a divisional headquarters. There are a total of sixty-eight divisions.
+                                </p>
+                        </div>
+                        <div class="col-sm-4" >
+                            <h4 style="display: inline;">Urban rail</h4>
+                            <hr style="display: inline-block; vertical-align: bottom;"><hr/>
+                            <p align="justify">
+                                The first modern rapid transit in India was the Kolkata Metro, with operations starting in 1984. Chennai MRTS acts as second urban mass transit system since 1997 and differs from country's other MRTS suburban systems. The Delhi Metro in the capital city of New Delhi is third conventional metro beginning operations in 2002.The Namma Metro in Bangalore is India's fourth operational rapid transit beginning operations in 2011. Currently, rapid transit systems have been deployed in these cities and more are under construction or in planning in several major cities of India.
+                            </p>
+                        </div>
+
+                    </div><br/>
+
+            </div>
+            <div id="section_div" ng-view>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--Google Map APi-->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlhVW2wqrgTC0A5noY1q28wO5zi_LKnnE&signed_in=true"></script>
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- For Responsive Menu & Navigation Bar-->
+    <script src="js/script.js"></script>
+
+  <!--<script src="app.js"></script>-->
+      <script src="libs/angular.min.js"> </script>
+      <script src="libs/angular-route.js"> </script>
+      <script src="js/app.js"> </script>
+    <!-- For Auto Complete-->
+    <script src="//code.jquery.com/jquery-1.10.2.js"> </script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"> </script>
+
+
+    <!--Services-->
+    <script src="js/services/Key_GMap_API.js"> </script>
+    <script src="js/services/Key_Train_API.js"> </script>
+    <script src="js/services/API_Data/Service_TrainAutoComplete.js"> </script>
+    <script src="js/services/API_Data/Service_Train_route_information.js"> </script>
+    <script src="js/services/API_Data/Service_Seat_Availability.js"> </script>
+    <script src="js/services/API_Data/Service_Train_Fare_Enquiry.js"> </script>
+    <script src="js/services/API_Data/Service_Trains_between_stations.js"></script>
+    <script src="js/services/API_Data/Service_Intermediator.js"></script>
+    <script src="js/services/API_Data/Service_Station_List.js"></script>
+    <script src="js/services/API_Data/Service_Intermediator_Selected_Train.js"></script>
+
+
+<!--Controllers-->
+    <script src="js/controllers/Ctrl_Search.js"> </script>
+    <script src="js/controllers/Ctrl_landing_page.js"> </script>
+    <script src="js/controllers/Ctrl_Google_Map.js"> </script>
+    <script src="js/controllers/Ctrl_Train_Between_Stations.js"> </script>
+    <script src="js/controllers/Ctrl_Seat_Availability.js"> </script>
+    <script src="js/controllers/Ctrl_Fare%20Enquiry.js"> </script>
+
+
+<!--Calender API-->
+
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<div>
+    <div class="container" style="width: initial !important;">
+        <span class="Enq_heading"> Accommodation Availability Enquiry on Trains till Departure </span>
+        <div class="row row_under">
+            <div class="col-sm-3 columns3">
+                <label>Source Station:</label> <br/>
+                <select class="inp_ctrl" ng-model="optSrcCode">-->
+                    <option ng-repeat="x in routes" value="{{x.code}}">{{x.fullname}}</option>
+                </select>
+                <hr>
+            </div>
+            <div class="col-sm-3 columns3">
+                <label>Destination Station:</label> <br/>
+                <select class="inp_ctrl" ng-model="optDesCode">
+                    <option ng-repeat="x in routes" value="{{x.code}}">
+                        {{x.fullname}}
+                    </option>
+                </select>
+                <hr>
+            </div>
+        </div>
+        <div class="row row_under">
+            <div class="col-sm-3 columns3">
+                <label>Journey Date :</label> <br/>
+                <input class="inp_ctrl" type="date" id="datepicker" ng-model="doj" />
+                <hr>
+            </div>
+            <div class="col-sm-6" ng-if="iv_error"> <br/>
+                <span style="display: inline-block;" class="error_msg" ng-bind="iv_error_msg">
+                </span>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-3 columns3">
+                <label>Class :</label> <br/>
+                <select  class="inp_ctrl" ng-model="optClass" ng-init="optClass='SL'" >
+
+                    <option value="1A"> FIRST AC</option>
+
+                    <option value="2A"> SECOND AC</option>
+
+                    <option value="3A"> THIRD AC</option>
+
+                    <option value="3E"> 3 AC Economy</option>
+
+                    <option value="CC"> AC CHAIR CAR</option>
+
+                    <option value="FC"> FIRST CLASS</option>
+
+                    <option value="SL" ng-selected="true"> SLEEPER CLASS</option>
+
+                    <option value="2S"> SECOND SEATING</option>
+
+                </select>
+                <hr>
+            </div>
+            <div class="col-sm-3 columns3">
+                <label>Quota :</label> <br/>
+                <select class="inp_ctrl" ng-model="optQuota" ng-init="optQuota='GN'">
+
+                    <option value="CK"> Tatkal Quota </option>
+
+                    <option value="PT"> Premium Tatkal Quota </option>
+
+                    <option value="LD"> Ladies Quota </option>
+
+                    <option value="DF"> Defence Quota </option>
+
+                    <option value="FT"> Foreign Tourist </option>
+
+                    <option value="DP"> Duty Pass Quota </option>
+
+                    <option value="HP"> Handicaped Quota </option>
+
+                    <option value="PH"> Parliament House Quota </option>
+
+                    <option value="SS"> Lower Berth Quota </option>
+
+                    <option value="YU"> Yuva Quota </option>
+
+                    <option value="GN" ng-selected="true">GENERAL QUOTA</option>
+
+                </select>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 columns3" style="text-align: center;">
+                <button ng-disabled="displayMainLoader" class="searchButton" ng-click="btnSeatAvailability()"> Seat Availability </button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div style="text-align: center;">
+        <span style="text-align: left;"  ng-if="DisplayResultError" class="error_msg" >Railway server do not responding.</span>
+
+
+    </div>
+    <!-- displayMainLoader-->s
+        <div ng-if="displayMainLoader" style="text-align: center; top: 4%; position: absolute; width: 100%;height: 100%;padding-top:20%;opacity: 0.9;background-color: #DCDCEC;">
+             <img src="images/332%20(1).gif" style="margin: 10px;">
+        </div>
+
+
+    <div ng-if="displatResultTable" class="container" style="width: initial !important;">
+    <!-- Headings Seat Availability Status-->
+        <br/>
+        <span style="border-top: 1px solid #ccc; margin-top: 10px;" class="Enq_heading">You Queried For</span>
+        <table>
+            <thead>
+                <tr>
+                    <th class="seats_table_head1">Train No</th>
+                    <th class="seats_table_head1"> Train Name</th>
+                    <th class="seats_table_head1">Date <br/> (DD-MM-YYYY)</th>
+                    <th class="seats_table_head1">Source Station</th>
+                    <th class="seats_table_head1">Destination <br/> Station</th>
+                    <th class="seats_table_head1">Quota Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="seats_table_value1" ng-bind="seat_availability.train_number"></td>
+                    <td class="seats_table_value1" ng-bind="seat_availability.train_name"></td>
+                    <td class="seats_table_value1" ng-bind="doj"></td>
+                    <td class="seats_table_value1" ng-bind="seat_availability.from.name"></td>
+                    <td class="seats_table_value1" ng-bind="seat_availability.to.name"></td>
+                    <td class="seats_table_value1" ng-bind="seat_availability.quota.quota_name"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    <!--//display seat avilability Table-->
+        <br/>
+
+            <!-- Heading-->
+            <span class="seat_title">Accommodation Availability Enquiry</span>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="stt">S.No.</th>
+                        <th class="stt">Date (DD-MM-YYYY)</th>
+                        <th class="stt">Class {{seat_availability.class.class_name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in seat_availability.availability">
+                        <td class="seat_avai_val"> {{$index+1}} </td>
+                        <td class="seat_avai_val" ng-bind="x.date"> </td>
+                        <td class="seat_avai_val" ng-bind="x.status"> </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+
+</div>
+</div>

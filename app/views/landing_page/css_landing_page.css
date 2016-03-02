@@ -1,0 +1,176 @@
+.Enq_heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: #a21921;
+    font-weight: bold;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+.Enq_Train_No_Cols{
+
+}
+
+#landing_div{
+    width : 100%;
+    height: 100%;
+    background-color: cornsilk;
+}
+.heading_route{
+    display: inline-block;
+    vertical-align: top;
+    width: 134px;
+    height : 40px;
+}
+#map{
+    width: 700px;
+    height: 650px;
+    background:  tan;
+}
+
+/*For table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) {
+    background: #eee;
+}
+tr:nth-of-type(odd) td {
+    border-bottom: 1px solid #DAD9D9;;
+}
+
+
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+td, th {
+    padding: 6px !important;;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+/*For Responsive Table ...*/
+/*
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr { border: 1px solid #ccc; }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50% !important;
+    }
+
+    td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        height: auto;
+        padding-right: 10px;
+        /*white-space: nowrap;*/
+    }
+
+    /*
+    Label the data
+    */
+    td:nth-of-type(1):before { content: "SNo";  font-weight: bold;}
+    td:nth-of-type(2):before { content: "Stn Code";  font-weight: bold;}
+    td:nth-of-type(3):before { content: "Stn Name";  font-weight: bold;}
+    td:nth-of-type(4):before { content: "Route No.";  font-weight: bold;}
+    td:nth-of-type(5):before { content: "Arrival Time"; font-weight: bold; }
+    td:nth-of-type(6):before { content: "Dep. Time";  font-weight: bold;}
+    td:nth-of-type(7):before { content: "Halt Time (In Minutes)";  font-weight: bold;}
+    td:nth-of-type(8):before { content: "Distance"; font-weight: bold; }
+    td:nth-of-type(9):before { content: "Day";  font-weight: bold;}
+
+    td.Enq_data:nth-of-type(1):before { content: "Train No";  font-weight: bold;}
+    td.Enq_data:nth-of-type(2):before { content: "Train Name";  font-weight: bold;}
+    td.Enq_data:nth-of-type(3):before { content: "Runs From Source";  font-weight: bold;}
+    td.Enq_data:nth-of-type(4):before { content: "Runs On"; font-weight: bold; }
+
+    /*Train Availability Between Important Stations*/
+    td.between_Query:nth-of-type(1):before { content: "Origin";  font-weight: bold;}
+    td.between_Query:nth-of-type(2):before { content: "Destination";  font-weight: bold;}
+    td.between_Query:nth-of-type(3):before { content: "Date";  font-weight: bold;}
+
+    td.between_trains:nth-of-type(4):before { content: "Train No.";  font-weight: bold;}
+    td.between_trains:nth-of-type(5):before { content: "Train Name"; font-weight: bold; }
+    td.between_trains:nth-of-type(6):before { content: "Origin";  font-weight: bold;}
+    td.between_trains:nth-of-type(7):before { content: "Dep.Time";  font-weight: bold;}
+    td.between_trains:nth-of-type(8):before { content: "Destination"; font-weight: bold; }
+    td.between_trains:nth-of-type(9):before { content: "Arr.Time";  font-weight: bold;}
+    td.between_trains:nth-of-type(8):before { content: "Travel Time"; font-weight: bold; }
+    td.between_trains:nth-of-type(9):before { content: "Days Of Run";  font-weight: bold;}
+
+    /*Fare Enquiry*/
+
+    td.Fare_Enq_data:nth-of-type(1):before { content: "Train Number";  font-weight: bold;}
+    td.Fare_Enq_data:nth-of-type(2):before { content: "Train Name"; font-weight: bold; }
+    td.Fare_Enq_data:nth-of-type(3):before { content: "Date (DD-MM-YYYY)";  font-weight: bold;}
+    td.Fare_Enq_data:nth-of-type(4):before { content: "Source Station";  font-weight: bold;}
+    td.Fare_Enq_data:nth-of-type(5):before { content: "Destination Station"; font-weight: bold; }
+    td.Fare_Enq_data:nth-of-type(6):before { content: "Quota Code";  font-weight: bold;}
+
+    td.Fare_charges:nth-of-type(1):before { content: "Classes"; font-weight: bold; }
+    td.Fare_charges:nth-of-type(2):before { content: "Fare / Charges";  font-weight: bold;}
+
+    /*Seat Availability*/
+    /*seats_table_value1*/
+    td.seats_table_value1:nth-of-type(1):before { content: "Train Number";  font-weight: bold;}
+    td.seats_table_value1:nth-of-type(2):before { content: "Train Name"; font-weight: bold; }
+    td.seats_table_value1:nth-of-type(3):before { content: "Date (DD-MM-YYYY)";  font-weight: bold;}
+    td.seats_table_value1:nth-of-type(4):before { content: "Source Station";  font-weight: bold;}
+    td.seats_table_value1:nth-of-type(5):before { content: "Destination Station"; font-weight: bold; }
+    td.seats_table_value1:nth-of-type(6):before { content: "Quota Code";  font-weight: bold;}
+
+    td.seat_avai_val:nth-of-type(1):before { content: "S.No.";  font-weight: bold;}
+    td.seat_avai_val:nth-of-type(2):before { content: "Date (DD-MM-YYYY)"; font-weight: bold; }
+    td.seat_avai_val:nth-of-type(3):before { content: "Class SLEEPER CLASS";  font-weight: bold;}
+
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    body {
+        /*padding: 0;*/
+        /*margin: 0;*/
+        width: 320px; }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body {
+        width: 495px;
+    }
+}
